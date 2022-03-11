@@ -3,13 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-type Props = {
-  ip: string;
-};
+interface IProps {
+  ip: any;
+}
 
-const Home = (props: Props) => {
-  const { ip } = props;
-
+const Home: NextPage<IProps> = ({ ip = "0.0.0.0" }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -35,8 +33,6 @@ Home.getInitialProps = async (ctx: NextPageContext) => {
   const ip = ctx?.req?.headers["x-real-ip"] || ctx?.req?.socket.remoteAddress;
 
   return {
-    props: {
-      ip,
-    },
+    ip,
   };
 };
