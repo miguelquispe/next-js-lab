@@ -1,4 +1,5 @@
 import type { NextPage, NextPageContext } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../src/features/Header";
@@ -9,6 +10,8 @@ import styles from "../styles/Home.module.css";
 interface IProps {
   ip: any;
 }
+
+const DynamicIP = dynamic(() => import("../src/features/ShowIP"));
 
 const Home: NextPage<IProps> = ({ ip = "0.0.0.0" }) => {
   return (
@@ -27,6 +30,10 @@ const Home: NextPage<IProps> = ({ ip = "0.0.0.0" }) => {
           Your IP is: <code className={styles.code}>{`${ip}`}</code>
         </p>
 
+        <h4>Dynamic Import</h4>
+        <DynamicIP />
+
+        <h4>Default Import</h4>
         <ShowIP />
       </main>
     </div>

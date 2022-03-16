@@ -16,7 +16,7 @@ const ShowIP: FunctionComponent = () => {
 
   return (
     <div>
-      <h2>Your IP: {IP}</h2>
+      <h2>Show IP: {IP}</h2>
     </div>
   );
 };
