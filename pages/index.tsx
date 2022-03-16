@@ -2,6 +2,7 @@ import type { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../src/features/Header";
+import ShowIP from "../src/features/ShowIP";
 import styles from "../styles/Home.module.css";
 // import { getClientIp } from "request-ip";
 
@@ -25,6 +26,8 @@ const Home: NextPage<IProps> = ({ ip = "0.0.0.0" }) => {
         <p className={styles.description}>
           Your IP is: <code className={styles.code}>{`${ip}`}</code>
         </p>
+
+        <ShowIP />
       </main>
     </div>
   );
