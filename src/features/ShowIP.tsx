@@ -1,4 +1,5 @@
 import axios from "axios";
+import publicIp from "public-ip";
 import { FunctionComponent, useState } from "react";
 import { useEffect } from "react";
 
@@ -7,16 +8,17 @@ const ShowIP: FunctionComponent = () => {
 
   useEffect(() => {
     const getIp = async () => {
-      const response = await axios("https://api.ipify.org/", {
-        params: {
-          format: "json",
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const { data } = response;
-      setIP(data.ip);
+      const ip = await publicIp.v4();
+      // const response = await axios("https://api.ipify.org/", {
+      //   params: {
+      //     format: "json",
+      //   },
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      // const { data } = response;
+      setIP(ip);
     };
 
     getIp();
@@ -25,6 +27,7 @@ const ShowIP: FunctionComponent = () => {
   return (
     <div>
       <h2>Show IP: {IP}</h2>
+      <p>with public-ip pkg</p>
     </div>
   );
 };

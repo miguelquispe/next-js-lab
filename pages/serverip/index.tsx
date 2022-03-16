@@ -4,7 +4,11 @@ import Head from "next/head";
 import Header from "../../src/features/Header";
 import styles from "../../styles/Home.module.css";
 
-const ServerIP: NextPage = () => {
+type Props = {
+  ip: any;
+};
+
+const ServerIP: NextPage<Props> = ({ ip = "0.0.0.0" }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,9 +24,21 @@ const ServerIP: NextPage = () => {
         </h1>
 
         <p className={styles.description}>Show your network tab in Devtools</p>
+
+        <h3>IP from ServerSideProps: {ip}</h3>
       </main>
     </div>
   );
 };
 
 export default ServerIP;
+
+export async function getServerSideProps() {
+  const response = await fetch("https://api.ipify.org/?format=json");
+  const { ip } = await response.json();
+  return {
+    props: {
+      ip,
+    },
+  };
+}
