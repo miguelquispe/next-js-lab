@@ -1,3 +1,4 @@
+import axios from "axios";
 import { FunctionComponent, useState } from "react";
 import { useEffect } from "react";
 
@@ -6,9 +7,16 @@ const ShowIP: FunctionComponent = () => {
 
   useEffect(() => {
     const getIp = async () => {
-      const req = await fetch("https://api.ipify.org/?format=json");
-      const res = await req.json();
-      setIP(res.ip);
+      const response = await axios("https://api.ipify.org/", {
+        params: {
+          format: "json",
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { data } = response;
+      setIP(data.ip);
     };
 
     getIp();
